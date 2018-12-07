@@ -2,18 +2,25 @@
 # yarn lockfile v1
 
 
-"@rapid-build-ui/rb-base@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@rapid-build-ui/rb-base/-/rb-base-0.0.4.tgz#7461055bdb1135dfb6652ccea08eb42b1b55a45d"
-  integrity sha512-azzX9vRzVPYCKnamfNpiEyObKs3CCSitBMblIjo7dUAMnv6H/BStnmhz6p+5PbcrL0+C1yw2KzpDNamosniTDA==
+"@rapid-build-ui/form-control@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@rapid-build-ui/form-control/-/form-control-0.0.5.tgz#025ceb3b70798ccde39faa5945a531c376380ff3"
+  integrity sha512-eEBAlkvBP+pX2ojpWO0kunLGY46Dnk6y++TnUExF28s3sAKF6uA9MeoQOn/1/crLtsbKj0CYB85e0iKmttgSDw==
   dependencies:
-    lit-html "^0.11.4"
+    "@rapid-build-ui/rb-base" "^0.0.6"
+
+"@rapid-build-ui/rb-base@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@rapid-build-ui/rb-base/-/rb-base-0.0.6.tgz#f6ed9d11fb696f6159f197b65ba2a4820a9f8cd1"
+  integrity sha512-aSuPWmfFrUezxM7KnyzcRuNutVds97fYCp7T2CHhAd4YXZP65tSdMoLHIZ+0+ZXMaV95CKTaxd5NlIZeew4zmg==
+  dependencies:
+    lit-html "^0.14.0"
     skatejs "^5.2.4"
 
-lit-html@^0.11.4:
-  version "0.11.4"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.11.4.tgz#fa397d2b2f2d0523ebc136e5a1699aa4e9346152"
-  integrity sha512-yfJUxQrRjhYo4cdz3Db9YlkHs9v+rTZA4fvE/dqCOrA1Q2Bmx52X2OtEgGQ+JhyCb6ddDTndLijZjsSoQ44G7Q==
+lit-html@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.14.0.tgz#d6830e8f55fb923b0f5824decf7da082a1d22997"
+  integrity sha512-+xqUPzzJGEDqb0F5DOnMXvL0jxpkKebAMlXycKZxFtzlmD+qePEmYrEUPF9XVXcc5eYBzYXTCOUcjSCod4YvgQ==
 
 skatejs@^5.2.4:
   version "5.2.4"
