@@ -2,22 +2,20 @@
  * BORDERS
  **********/
 textarea {
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-	border-bottom-color: mapGet($formControlColors, borders, textarea, default);
-	&:hover {
-		border-bottom-color: mapGet($formControlColors, borders, textarea, hover);
+	&:hover ~ .focus-line {
+		border-bottom-color: mapGet($formControlColors, borders, focusLine, hover);
 	}
-	&:focus {
-		border-bottom-color: mapGet($formControlColors, borders, textarea, focus);
-	}
+}
+
+.focus-line {
+	border-bottom-color: mapGet($formControlColors, borders, focusLine, default);
 }
 
 /* Input States
  ***************/
 .form-control {
 	&.invalid {
-		textarea {
+		.focus-line {
 			border-bottom-color: mapGet($formControlColors, borders, invalid, default);
 		}
 	}

@@ -26,14 +26,6 @@
 			@focus="${this._onfocus.bind(this)}"
 			@input="${this._oninput.bind(this)}">
 		</textarea>
-		${props.iconKind
-			? html`
-				<rb-icon
-					kind="${props.iconKind}"
-					source="${props.iconSource}">
-				</rb-icon>`
-			: null
-		}
 		<b class="focus-line"></b>
 	</div>
 	${props._eMsg || props.subtext
