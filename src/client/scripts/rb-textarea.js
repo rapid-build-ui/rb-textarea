@@ -3,7 +3,6 @@
  ***********/
 import { props, html, RbBase } from '../../rb-base/scripts/rb-base.js';
 import FormControl from '../../form-control/scripts/form-control.js';
-import '../../rb-icon/scripts/rb-icon.js';
 import template from '../views/rb-textarea.html';
 
 export class RbTextarea extends FormControl(RbBase()) {
