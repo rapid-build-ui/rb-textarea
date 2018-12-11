@@ -3,8 +3,8 @@
  *******************/
 .focus-line {
 	width: 100%;
-	padding-top: 7px;
-	margin-top: -2px; // cover textarea border and prevent shift shock
+	padding-bottom: 1px;
+	margin-top: 3px; // cover textarea border and prevent shift shock
 	transform-origin: center top; // TODO: add border-bottom and fix iOS
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
@@ -21,6 +21,7 @@
 			border-bottom-width: 2px;
 			animation-name: focus-line;
 			animation-duration: .18s;
+			margin-bottom: -1px;
 		}
 	}
 }

@@ -4,11 +4,13 @@
 .textarea-wrap {
 	display: flex;
 	flex-wrap: wrap; // so focus line is below textarea
-	// max-width: 167px;
-	// min-height: 70px;
+	width: 300px;
 }
 textarea {
-	width: 100%; // needed for icon to be on same line
+	width: 100%;
+	resize: vertical;
+	max-width: 300px;
+	min-height: 90px;
 	padding: 0 0 6px;
 	border: none;
 	outline: none;
