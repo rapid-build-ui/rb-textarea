@@ -2,6 +2,7 @@
 	?disabled="${props.disabled}"
 	class="
 		form-control
+		${props.autoHeight ? 'no-overflow' : ''}
 		${props.kind || 'default'}
 		${props.right ? 'right' : ''}
 		${props.inline ? 'inline' : ''}
@@ -17,7 +18,7 @@
 	}
 	<div class="textarea-wrap">
 		<textarea
-			@keydown="${this._resize.bind(this)}"
+			@keydown="${this._onkeydown.bind(this)}"
 			id="textarea"
 			name="${props.name}"
 			.value="${props.value}"
@@ -25,8 +26,14 @@
 			placeholder="${props.placeholder}"
 			@blur="${this._onblur.bind(this)}"
 			@focus="${this._onfocus.bind(this)}"
-			@input="${this._oninput.bind(this)}">
+			@input="${this._oninput.bind(this)}"
+			>
+
 		</textarea>
+<!-- 		<slot style="display: none"
+			  @slotchange="${this._slotchange.bind(this)}">
+
+		</slot> -->
 		<b class="focus-line"></b>
 	</div>
 	${props._eMsg || props.subtext
