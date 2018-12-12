@@ -4,7 +4,7 @@
 .textarea-wrap {
 	display: flex;
 	flex-wrap: wrap; // so focus line is below textarea
-	width: 300px;
+	max-width: 300px;
 }
 textarea {
 	width: 100%;
