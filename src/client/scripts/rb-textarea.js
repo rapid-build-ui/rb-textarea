@@ -19,6 +19,9 @@ export class RbTextarea extends FormControl(RbBase()) {
 	static get props() { // :object
 		return {
 			...super.props,
+			fixedHeight: Object.assign({}, props.boolean, {
+				default: false
+			}),
 			inline: props.boolean,
 			kind: props.string,
 			label: props.string,
@@ -56,6 +59,11 @@ export class RbTextarea extends FormControl(RbBase()) {
 			return this._dirty = true;
 		if (!this._blurred) return;
 		await this.validate();
+	}
+	_resize(e) {
+		if (this.fixedHeight) return false
+		this.rb.elms.focusElm.style.cssText = 'height:auto;'
+		this.rb.elms.focusElm.style.cssText = 'height:' + this.rb.elms.focusElm.scrollHeight + 'px'
 	}
 
 	async _onblur(e) {

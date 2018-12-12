@@ -17,6 +17,7 @@
 	}
 	<div class="textarea-wrap">
 		<textarea
+			@keydown="${this._resize.bind(this)}"
 			id="textarea"
 			name="${props.name}"
 			.value="${props.value}"
