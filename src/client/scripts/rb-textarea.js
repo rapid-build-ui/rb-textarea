@@ -51,11 +51,8 @@ export class RbTextarea extends FormControl(RbBase()) {
 		this._active = true;
 	}
 
-	_onkeydown(e) {
-		this._resize(e)
-	}
-
 	async _oninput(e) { // TODO: add debouncing
+		this.autoHeight && this._resize(e)
 		const oldVal = this.value;
 		const newVal = e.target.value;
 		this.value = newVal;
@@ -65,9 +62,8 @@ export class RbTextarea extends FormControl(RbBase()) {
 		await this.validate();
 	}
 	_resize(e) {
-		if (!this.autoHeight) return false
-		this.rb.elms.focusElm.style.cssText = 'height:auto;'
-		this.rb.elms.focusElm.style.cssText = 'height:' + this.rb.elms.focusElm.scrollHeight + 'px'
+		this.rb.elms.focusElm.style.height = 0
+		this.rb.elms.focusElm.style.height = this.rb.elms.focusElm.scrollHeight + 'px'
 	}
 
 	async _onblur(e) {
