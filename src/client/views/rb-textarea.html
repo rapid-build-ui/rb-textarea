@@ -25,14 +25,7 @@
 			placeholder="${props.placeholder}"
 			@blur="${this._onblur.bind(this)}"
 			@focus="${this._onfocus.bind(this)}"
-			@input="${this._oninput.bind(this)}"
-			>
-
-		</textarea>
-<!-- 		<slot style="display: none"
-			  @slotchange="${this._slotchange.bind(this)}">
-
-		</slot> -->
+			@input="${this._oninput.bind(this)}"></textarea>
 		<b class="focus-line"></b>
 	</div>
 	${props._eMsg || props.subtext

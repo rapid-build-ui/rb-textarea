@@ -11,7 +11,14 @@ export class RbTextarea extends FormControl(RbBase()) {
 	viewReady() { // :void
 		super.viewReady && super.viewReady();
 		this.rb.elms.focusElm = this.shadowRoot.querySelector('textarea');
-		this.rb.elms.formControl = this.rb.elms.focusElm
+		this.rb.elms.formControl = this.rb.elms.focusElm;
+		if (!this.hasAttribute('value')) this._createContentObserver();
+		if (this.autoHeight) setTimeout(() => this._resize());
+	}
+
+	disconnectedCallback() {
+		super.disconnectedCallback();
+		this._contentObserver && this._contentObserver.disconnect();
 	}
 
 	/* Properties
@@ -40,8 +47,28 @@ export class RbTextarea extends FormControl(RbBase()) {
 	 ***********/
 	updating(prevProps) { // :void
 		if (prevProps.value === this.value) return;
+		this.autoHeight && this._resize();
 		this.rb.events.emit(this, 'value-changed', {
 			detail: { value: this.value }
+		});
+	}
+
+	_createContentObserver() {
+		this.value = this.textContent; // set value because callback doesn't run on init
+
+		const callback = mutationsList => {
+			for(const mutation of mutationsList) {
+				if (mutation.type !== 'characterData') return;
+				// console.log(mutation.target.textContent);
+				this.value = mutation.target.textContent;
+			}
+		};
+
+		this._contentObserver = new MutationObserver(callback);
+		this._contentObserver.observe(this, {
+			characterData: true,
+			characterDataOldValue: false,
+			subtree: true
 		});
 	}
 
@@ -51,8 +78,13 @@ export class RbTextarea extends FormControl(RbBase()) {
 		this._active = true;
 	}
 
+	_resize() {
+		if (!this.rb.elms.focusElm) return;
+		this.rb.elms.focusElm.style.height = 0;
+		this.rb.elms.focusElm.style.height = `${this.rb.elms.focusElm.scrollHeight}px`;
+	}
+
 	async _oninput(e) { // TODO: add debouncing
-		this.autoHeight && this._resize(e)
 		const oldVal = this.value;
 		const newVal = e.target.value;
 		this.value = newVal;
@@ -61,21 +93,14 @@ export class RbTextarea extends FormControl(RbBase()) {
 		if (!this._blurred) return;
 		await this.validate();
 	}
-	_resize(e) {
-		this.rb.elms.focusElm.style.height = 0
-		this.rb.elms.focusElm.style.height = this.rb.elms.focusElm.scrollHeight + 'px'
-	}
 
 	async _onblur(e) {
 		this._active = false;
 		if (!this._dirty) return;
 		this._blurred = true;
-		this.value = e.target.value;
+		this.value = e.target.value
+		this.rb.elms.focusElm.value =  e.target.value
 		await this.validate();
-	}
-
-	_slotchange(e) {
-		console.log('xxx', e);
 	}
 
 	/* Template
