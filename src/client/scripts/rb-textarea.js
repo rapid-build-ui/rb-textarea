@@ -18,7 +18,7 @@ export class RbTextarea extends FormControl(RbBase()) {
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
-		this._contentObserver && this._contentObserver.disconnect();
+		this._contentObserver && clearInterval(this._contentObserver);
 	}
 
 	/* Properties
@@ -54,23 +54,17 @@ export class RbTextarea extends FormControl(RbBase()) {
 		});
 	}
 
+	// TODO: fix safari from crashing when using MutationObserver
 	_createContentObserver() {
-		this.value = this.textContent; // set value because callback doesn't run on init
-
-		const callback = mutationsList => {
-			for(const mutation of mutationsList) {
-				if (mutation.type !== 'characterData') return;
-				// console.log(mutation.target.textContent);
-				this.value = mutation.target.textContent;
-			}
-		};
-
-		this._contentObserver = new MutationObserver(callback);
-		this._contentObserver.observe(this, {
-			characterData: true,
-			characterDataOldValue: false,
-			subtree: true
-		});
+		const textNode = this.firstChild;
+		let oldText = textNode && textNode.textContent;
+		this.value  = oldText || '';
+		this._contentObserver = setInterval(() => {
+			const newText = textNode && textNode.textContent;
+			if (newText === oldText) return;
+			oldText = newText;
+			this.value = newText;
+		}, 200);
 	}
 
 	/* Event Handlers
