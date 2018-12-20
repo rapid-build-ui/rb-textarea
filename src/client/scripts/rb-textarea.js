@@ -34,6 +34,7 @@ export class RbTextarea extends FormControl(RbBase()) {
 			label: props.string,
 			placeholder: props.string,
 			right: props.boolean,
+			rows: props.number,
 			subtext: props.string,
 			type: props.string,
 			value: props.string,
