@@ -13,6 +13,7 @@ export class RbTextarea extends FormControl(RbBase()) {
 		this.rb.elms.focusElm = this.shadowRoot.querySelector('textarea');
 		this.rb.elms.formControl = this.rb.elms.focusElm;
 		if (!this.hasAttribute('value')) this._createContentObserver();
+		this._initialHeight = this.rb.elms.focusElm.scrollHeight;
 		if (this.autoHeight) setTimeout(() => this._resize());
 	}
 
@@ -75,8 +76,9 @@ export class RbTextarea extends FormControl(RbBase()) {
 
 	_resize() {
 		if (!this.rb.elms.focusElm) return;
+		if (!this.value.length) return;
 		this.rb.elms.focusElm.style.height = 0;
-		this.rb.elms.focusElm.style.height = `${this.rb.elms.focusElm.scrollHeight}px`;
+		this.rb.elms.focusElm.style.height = this.rb.elms.focusElm.scrollHeight < this._initialHeight ? `${this._initialHeight}px` : `${this.rb.elms.focusElm.scrollHeight}px`;
 	}
 
 	async _oninput(e) { // TODO: add debouncing
