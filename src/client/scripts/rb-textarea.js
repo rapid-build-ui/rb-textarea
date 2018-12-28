@@ -76,7 +76,6 @@ export class RbTextarea extends FormControl(RbBase()) {
 
 	_resize() {
 		if (!this.rb.elms.focusElm) return;
-		if (!this.value.length) return;
 		this.rb.elms.focusElm.style.height = 0;
 		this.rb.elms.focusElm.style.height = this.rb.elms.focusElm.scrollHeight < this._initialHeight ? `${this._initialHeight}px` : `${this.rb.elms.focusElm.scrollHeight}px`;
 	}
