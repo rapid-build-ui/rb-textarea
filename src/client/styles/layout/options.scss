@@ -5,7 +5,6 @@
 	&.right {
 		align-items: flex-end;
 		textarea { text-align: right; }
-		// .label { transform-origin: right bottom; } // see label.scss
 	}
 	&.no-overflow {
 		textarea {overflow: hidden;}

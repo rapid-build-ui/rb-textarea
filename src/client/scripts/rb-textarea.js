@@ -1,20 +1,24 @@
-/***********
+/**************
  * RB-TEXTAREA
- ***********/
-import { props, html, RbBase } from '../../rb-base/scripts/rb-base.js';
-import FormControl from '../../form-control/scripts/form-control.js';
-import template from '../views/rb-textarea.html';
+ **************/
+import { RbBase, props, html } from '../../rb-base/scripts/rb-base.js';
+import FormControl             from '../../form-control/scripts/form-control.js';
+import template                from '../views/rb-textarea.html';
+import '../../rb-popover/scripts/rb-popover.js';
 
 export class RbTextarea extends FormControl(RbBase()) {
 	/* Lifecycle
 	 ************/
 	viewReady() { // :void
 		super.viewReady && super.viewReady();
-		this.rb.elms.focusElm = this.shadowRoot.querySelector('textarea');
-		this.rb.elms.formControl = this.rb.elms.focusElm;
+		Object.assign(this.rb.elms, {
+			focusElm:    this.shadowRoot.querySelector('textarea'),
+			formControl: this.shadowRoot.querySelector('textarea')
+		});
 		if (!this.hasAttribute('value')) this._createContentObserver();
 		this._initialHeight = this.rb.elms.focusElm.scrollHeight;
 		if (this.autoHeight) setTimeout(() => this._resize());
+		this._initSlotStates(); // see rb-base: private/mixins/slot.js
 	}
 
 	disconnectedCallback() {
@@ -101,7 +105,7 @@ export class RbTextarea extends FormControl(RbBase()) {
 
 	/* Template
 	 ***********/
-	render({ props }) { // :string
+	render({ props, state }) { // :string
 		return html template;
 	}
 }

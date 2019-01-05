@@ -1,15 +1,15 @@
-/********
- * INPUT
- ********/
+/***********
+ * TEXTAREA
+ ***********/
 .textarea-wrap {
 	display: flex;
 	flex-wrap: wrap; // so focus line is below textarea
-	max-width: 300px;
+	max-width: $MAX_WIDTH;
 }
 textarea {
 	width: 100%;
 	resize: vertical;
-	max-width: 300px;
+	max-width: $MAX_WIDTH;
 	padding: 0 0 6px;
 	border: none;
 	outline: none;

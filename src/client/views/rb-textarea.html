@@ -2,19 +2,29 @@
 	?disabled="${props.disabled}"
 	class="
 		form-control
-		${props.autoHeight ? 'no-overflow' : ''}
 		${props.kind || 'default'}
 		${props.right ? 'right' : ''}
-		${props.inline ? 'inline' : ''}
-		${props._valid ? 'valid' : 'invalid'}
-		${props._active ? 'active' : ''}
 		${props.label && 'with-label'}
+		${props.inline ? 'inline' : ''}
+		${props._active ? 'active' : ''}
+		${props._valid ? 'valid' : 'invalid'}
+		${props.autoHeight ? 'no-overflow' : ''}
+		${state.slots.popover ? 'with-popover' : ''}
 		${props.label && (props._active || props.placeholder || props.value) && 'label-above'}
-
 	">
-	${props.label
-		? html`<label class="label" for="textarea">${props.label}</label>`
-		: null
+	${props.label || state.slots.popover
+		? html`
+			<div class="label">
+				${state.slots.popover
+					? html`<slot name="popover"></slot>`
+					: null
+				}
+				${props.label
+					? html`<label for="textarea">${props.label}</label>`
+					: null
+				}
+			</div>
+		`: null
 	}
 	<div class="textarea-wrap">
 		<textarea
