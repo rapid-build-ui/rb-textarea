@@ -6,6 +6,7 @@
 	flex-wrap: wrap; // so focus line is below textarea
 	max-width: $MAX_WIDTH;
 }
+
 textarea {
 	width: 100%;
 	resize: vertical;
@@ -16,4 +17,30 @@ textarea {
 	border-radius: 0; // needed for iOS (shows rounded bottom corners)
 	box-shadow: none; // firefox displays this on invalid form controls
 	box-sizing: border-box;
+}
+
+/* Normalize Scrollbar (mac | windows)
+ **********************/
+textarea {
+	scrollbar-width: thin; // supported by firefox
+
+	&::-webkit-scrollbar,
+	&::-webkit-scrollbar-thumb {
+		border-radius: 100px;
+	}
+	&::-webkit-scrollbar {
+		width:  8px;
+		height: 8px;
+		&:hover {
+			background: rgba(0, 0, 0, 0.09);
+		}
+	}
+	&::-webkit-scrollbar-thumb {
+		background: rgba(0, 0, 0, 0.5);
+		&:active {
+			background: rgba(0, 0, 0, 0.61); // darker onclick
+		}
+		&:vertical   { min-height: 10px; }
+		&:horizontal { min-width:  10px; }
+	}
 }
