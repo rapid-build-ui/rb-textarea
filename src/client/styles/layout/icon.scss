@@ -6,16 +6,14 @@ $BUMP_SPACE: $ICON_SPACE + .35em;
 
 .form-control {
 	&.icon-left {
-		textarea   { padding-left: $BUMP_SPACE; }
-		// .label  { margin-left: $BUMP_SPACE; }
-		rb-icon { margin-right: -$ICON_SPACE; }
+		textarea { padding-left: $BUMP_SPACE; }
+		rb-icon  { margin-right: -$ICON_SPACE; }
 		&.label-above { .label { margin-left: 0; } }
 		.textarea-wrap { flex-direction: row-reverse; }
 	}
 	&.icon-right {
-		textarea   { padding-right: $BUMP_SPACE; }
-		// .label  { margin-right: $BUMP_SPACE; }
-		rb-icon { margin-left: -$ICON_SPACE; }
+		textarea { padding-right: $BUMP_SPACE; }
+		rb-icon  { margin-left: -$ICON_SPACE; }
 		&.label-above { .label { margin-right: 0; } }
 	}
 }

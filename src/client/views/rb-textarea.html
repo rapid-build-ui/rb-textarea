@@ -4,36 +4,39 @@
 		form-control
 		${props.kind || 'default'}
 		${props.right ? 'right' : ''}
-		${props.inline ? 'inline' : ''}
-		${props._valid ? 'valid' : 'invalid'}
-		${props._active ? 'active' : ''}
 		${props.label && 'with-label'}
+		${props.inline ? 'inline' : ''}
+		${props._active ? 'active' : ''}
+		${props._valid ? 'valid' : 'invalid'}
+		${props.autoHeight ? 'no-overflow' : ''}
+		${state.slots.popover ? 'with-popover' : ''}
 		${props.label && (props._active || props.placeholder || props.value) && 'label-above'}
-
 	">
-	${props.label
-		? html`<label class="label" for="textarea">${props.label}</label>`
-		: null
+	${props.label || state.slots.popover
+		? html`
+			<div class="label">
+				${state.slots.popover
+					? html`<slot name="popover"></slot>`
+					: null
+				}
+				${props.label
+					? html`<label for="textarea">${props.label}</label>`
+					: null
+				}
+			</div>
+		`: null
 	}
 	<div class="textarea-wrap">
 		<textarea
 			id="textarea"
+			rows="${props.rows || 4}"
 			name="${props.name}"
 			.value="${props.value}"
 			type="${props.type || 'text'}"
 			placeholder="${props.placeholder}"
 			@blur="${this._onblur.bind(this)}"
 			@focus="${this._onfocus.bind(this)}"
-			@input="${this._oninput.bind(this)}">
-		</textarea>
-		${props.iconKind
-			? html`
-				<rb-icon
-					kind="${props.iconKind}"
-					source="${props.iconSource}">
-				</rb-icon>`
-			: null
-		}
+			@input="${this._oninput.bind(this)}"></textarea>
 		<b class="focus-line"></b>
 	</div>
 	${props._eMsg || props.subtext
