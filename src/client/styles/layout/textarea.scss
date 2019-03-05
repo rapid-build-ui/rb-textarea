@@ -17,6 +17,7 @@ textarea {
 	border-radius: 0; // needed for iOS (shows rounded bottom corners)
 	box-shadow: none; // firefox displays this on invalid form controls
 	box-sizing: border-box;
+	background-color: transparent;
 }
 
 /* Normalize Scrollbar (mac | windows)
