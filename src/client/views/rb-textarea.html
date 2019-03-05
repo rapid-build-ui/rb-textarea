@@ -29,9 +29,10 @@
 	<div class="textarea-wrap">
 		<textarea
 			id="textarea"
+			?disabled="${props.disabled}"
+			.value="${props.value}"
 			rows="${props.rows || 4}"
 			name="${props.name}"
-			.value="${props.value}"
 			type="${props.type || 'text'}"
 			placeholder="${props.placeholder}"
 			@blur="${this._onblur.bind(this)}"
