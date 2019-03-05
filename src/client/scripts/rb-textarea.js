@@ -3,6 +3,7 @@
  **************/
 import { RbBase, props, html } from '../../rb-base/scripts/rb-base.js';
 import FormControl             from '../../form-control/scripts/form-control.js';
+import Converter               from '../../rb-base/scripts/public/props/converters.js';
 import template                from '../views/rb-textarea.html';
 import '../../rb-popover/scripts/rb-popover.js';
 
@@ -43,7 +44,10 @@ export class RbTextarea extends FormControl(RbBase()) {
 			value: props.string,
 			_blurred: props.boolean,
 			_active: props.boolean,
-			_dirty: props.boolean
+			_dirty: props.boolean,
+			readonly: Object.assign({}, props.boolean, {
+				deserialize: Converter.valueless
+			})
 		}
 	}
 
