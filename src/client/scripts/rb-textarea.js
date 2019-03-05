@@ -17,7 +17,6 @@ export class RbTextarea extends FormControl(RbBase()) {
 		});
 		if (!this.hasAttribute('value')) this._createContentObserver();
 		this._initialHeight = this.rb.elms.focusElm.scrollHeight;
-		console.log(this.autoHeight);
 		if (this.autoHeight) setTimeout(() => this._resize());
 		this._initSlotStates(); // see rb-base: private/mixins/slot.js
 	}
