@@ -1,3 +1,15 @@
+## [0.0.3](https://github.com/rapid-build-ui/rb-textarea/compare/v0.0.2...v0.0.3) (2019-05-09)
+
+
+### Dependencies
+
+* **bump deps:** ([8e75bc2](https://github.com/rapid-build-ui/rb-textarea/commit/8e75bc2))
+	* **form-control** to v0.0.8
+	* **rb-base** to v0.0.9
+	* **rb-popover** to v0.0.16
+
+
+
 ## [0.0.2](https://github.com/rapid-build-ui/rb-textarea/compare/v0.0.1...v0.0.2) (2019-03-05)
 
 
