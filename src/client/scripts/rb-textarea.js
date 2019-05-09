@@ -12,12 +12,14 @@ export class RbTextarea extends FormControl(RbBase()) {
 	 ************/
 	viewReady() { // :void
 		super.viewReady && super.viewReady();
-		Object.assign(this.rb.elms, {
-			focusElm:    this.shadowRoot.querySelector('textarea'),
-			formControl: this.shadowRoot.querySelector('textarea')
+		const textarea = this.shadowRoot.querySelector('textarea');
+		Object.assign(this.rb.formControl, {
+			elm:      textarea,
+			focusElm: textarea
 		});
+		Object.assign(this.rb.elms, { textarea });
 		if (!this.hasAttribute('value')) this._createContentObserver();
-		this._initialHeight = this.rb.elms.focusElm.scrollHeight;
+		this._initialHeight = textarea.scrollHeight;
 		if (this.autoHeight) setTimeout(() => this._resize());
 		this._initSlotStates(); // see rb-base: private/mixins/slot.js
 	}
@@ -42,9 +44,6 @@ export class RbTextarea extends FormControl(RbBase()) {
 			subtext: props.string,
 			type: props.string,
 			value: props.string,
-			_blurred: props.boolean,
-			_active: props.boolean,
-			_dirty: props.boolean,
 			readonly: Object.assign({}, props.boolean, {
 				deserialize: Converter.valueless
 			})
@@ -80,29 +79,31 @@ export class RbTextarea extends FormControl(RbBase()) {
 		this._active = true;
 	}
 
-	_resize() {
-		if (!this.rb.elms.focusElm) return;
-		this.rb.elms.focusElm.style.height = 0;
-		this.rb.elms.focusElm.style.height = this.rb.elms.focusElm.scrollHeight < this._initialHeight ? `${this._initialHeight}px` : `${this.rb.elms.focusElm.scrollHeight}px`;
-	}
-
 	async _oninput(e) { // TODO: add debouncing
 		const oldVal = this.value;
 		const newVal = e.target.value;
 		this.value = newVal;
 		if (!this._dirty && newVal !== oldVal)
 			return this._dirty = true;
-		if (!this._blurred) return;
+		if (!this._touched) return;
 		await this.validate();
 	}
 
 	async _onblur(e) {
 		this._active = false;
 		if (!this._dirty) return;
-		this._blurred = true;
-		this.value = e.target.value
-		this.rb.elms.focusElm.value =  e.target.value
+		this._touched = true;
+		this.value = e.target.value;
 		await this.validate();
+	}
+
+	_resize() {
+		if (!this.rb.view.isReady) return;
+		const { textarea } = this.rb.elms;
+		textarea.style.height = 0;
+		textarea.style.height = textarea.scrollHeight < this._initialHeight
+			? `${this._initialHeight}px`
+			: `${textarea.scrollHeight}px`;
 	}
 
 	/* Template
