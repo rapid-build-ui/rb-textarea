@@ -10,6 +10,10 @@ import '../../rb-popover/scripts/rb-popover.js';
 export class RbTextarea extends FormControl(RbBase()) {
 	/* Lifecycle
 	 ************/
+	constructor() {
+		super();
+		this.rb.formControl.isTextarea = true;
+	}
 	viewReady() { // :void
 		super.viewReady && super.viewReady();
 		const textarea = this.shadowRoot.querySelector('textarea');
@@ -23,7 +27,6 @@ export class RbTextarea extends FormControl(RbBase()) {
 		if (this.autoHeight) setTimeout(() => this._resize());
 		this._initSlotStates(); // see rb-base: private/mixins/slot.js
 	}
-
 	disconnectedCallback() {
 		super.disconnectedCallback();
 		this._contentObserver && clearInterval(this._contentObserver);
