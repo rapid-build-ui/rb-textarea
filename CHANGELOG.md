@@ -1,3 +1,26 @@
+## [0.0.4](https://github.com/rapid-build-ui/rb-textarea/compare/v0.0.3...v0.0.4) (2019-07-05)
+
+
+### Bug Fixes
+
+* **property value:** from setting string undefined and null when that is the type ([cebe11e](https://github.com/rapid-build-ui/rb-textarea/commit/cebe11e))
+* **textarea:** from not submitting new lines and so forth ([83c650b](https://github.com/rapid-build-ui/rb-textarea/commit/83c650b))
+
+
+### Features
+
+* **version:** add to component properties accessible via this.version ([534e9e5](https://github.com/rapid-build-ui/rb-textarea/commit/534e9e5))
+
+
+### Dependencies
+
+* **bump deps:** ([9355283](https://github.com/rapid-build-ui/rb-textarea/commit/9355283))
+	* **form-control** to v0.0.9
+	* **rb-base** to v0.0.10
+	* **rb-popover** to v0.0.17
+
+
+
 ## [0.0.3](https://github.com/rapid-build-ui/rb-textarea/compare/v0.0.2...v0.0.3) (2019-05-09)
 
 
