@@ -13,6 +13,7 @@ export class RbTextarea extends FormControl(RbBase()) {
 	 ************/
 	constructor() {
 		super();
+		this.version = '0.0.3';
 		this.rb.formControl.isTextarea = true;
 	}
 	viewReady() { // :void
