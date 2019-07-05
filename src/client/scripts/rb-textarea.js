@@ -4,12 +4,18 @@
 import { RbBase, props, html } from '../../rb-base/scripts/rb-base.js';
 import FormControl             from '../../form-control/scripts/form-control.js';
 import Converter               from '../../rb-base/scripts/public/props/converters.js';
+import Type                    from '../../rb-base/scripts/public/services/type.js';
 import template                from '../views/rb-textarea.html';
 import '../../rb-popover/scripts/rb-popover.js';
 
 export class RbTextarea extends FormControl(RbBase()) {
 	/* Lifecycle
 	 ************/
+	constructor() {
+		super();
+		this.version = '0.0.3';
+		this.rb.formControl.isTextarea = true;
+	}
 	viewReady() { // :void
 		super.viewReady && super.viewReady();
 		const textarea = this.shadowRoot.querySelector('textarea');
@@ -23,7 +29,6 @@ export class RbTextarea extends FormControl(RbBase()) {
 		if (this.autoHeight) setTimeout(() => this._resize());
 		this._initSlotStates(); // see rb-base: private/mixins/slot.js
 	}
-
 	disconnectedCallback() {
 		super.disconnectedCallback();
 		this._contentObserver && clearInterval(this._contentObserver);
@@ -43,9 +48,16 @@ export class RbTextarea extends FormControl(RbBase()) {
 			rows: props.number,
 			subtext: props.string,
 			type: props.string,
-			value: props.string,
 			readonly: Object.assign({}, props.boolean, {
 				deserialize: Converter.valueless
+			}),
+			value: Object.assign({}, props.string, {
+				coerce(val) {
+					// prevents returning string 'null' and 'undefined'
+					if (Type.is.null(val)) return val;
+					if (Type.is.undefined(val)) return val;
+					return String(val);
+				}
 			})
 		}
 	}
@@ -62,7 +74,9 @@ export class RbTextarea extends FormControl(RbBase()) {
 
 	// TODO: fix safari from crashing when using MutationObserver
 	_createContentObserver() {
-		const textNode = this.firstChild;
+		const textNode   = this.firstChild;
+		const hasContent = !!(textNode && textNode.textContent.trim().length);
+		if (!hasContent) return;
 		let oldText = textNode && textNode.textContent;
 		this.value  = oldText || '';
 		this._contentObserver = setInterval(() => {
