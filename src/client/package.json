@@ -1,6 +1,6 @@
 {
   "name": "@rapid-build-ui/rb-textarea",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "scripts/rb-textarea.js",
   "description": "Rapid Build UI Web Component: rb-textarea",
   "license": "MIT",
