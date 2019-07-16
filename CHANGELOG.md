@@ -1,3 +1,12 @@
+## [0.0.6](https://github.com/rapid-build-ui/rb-textarea/compare/v0.0.5...v0.0.6) (2019-07-16)
+
+
+### Dependencies
+
+* **bump:** deps rb ([258a44a](https://github.com/rapid-build-ui/rb-textarea/commit/258a44a))
+
+
+
 ## [0.0.5](https://github.com/rapid-build-ui/rb-textarea/compare/v0.0.4...v0.0.5) (2019-07-12)
 
 
